@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceo6c30t1wewj"]
+
+[ext_resource type="Texture2D" uid="uid://i7d16h22080c" path="res://Sprite/Pink.png" id="1_87ipw"]
+[ext_resource type="Script" uid="uid://nyqqty0icxaw" path="res://Scripts/main_menu.gd" id="1_hii65"]
+[ext_resource type="Texture2D" uid="uid://nq8n8wv2swyj" path="res://logo.png" id="2_hii65"]
+
+[node name="Main_menu" type="Node"]
+script = ExtResource("1_hii65")
+
+[node name="background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_87ipw")
+stretch_mode = 1
+
+[node name="logo" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -182.5
+offset_top = -215.0
+offset_right = 182.5
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hii65")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -12.0
+offset_right = 117.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Play
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

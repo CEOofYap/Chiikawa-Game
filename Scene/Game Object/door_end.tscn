@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://c75xuvkvacxlt"]
+
+[ext_resource type="Texture2D" uid="uid://cjqvnpi24ibri" path="res://Sprite/Door.png" id="1_j11jx"]
+[ext_resource type="Script" uid="uid://b4j0l2y2ni368" path="res://Scripts/door_end.gd" id="1_uarus"]
+[ext_resource type="FontFile" uid="uid://boxbh40dxc0nd" path="res://Fonts/PixelOperator8-Bold.ttf" id="3_avdib"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uarus"]
+size = Vector2(32, 54)
+
+[node name="Door end" type="Area2D"]
+collision_mask = 4
+script = ExtResource("1_uarus")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_j11jx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_uarus")
+
+[node name="Warning" type="Label" parent="."]
+visible = false
+texture_filter = 1
+offset_left = -52.0
+offset_top = -50.0
+offset_right = 53.0
+offset_bottom = -31.0
+theme_override_fonts/font = ExtResource("3_avdib")
+theme_override_font_sizes/font_size = 8
+text = "You don't have 
+enough keys"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

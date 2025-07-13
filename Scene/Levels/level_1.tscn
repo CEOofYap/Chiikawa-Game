@@ -1,0 +1,390 @@
+[gd_scene load_steps=17 format=4 uid="uid://oq7fsakhnmap"]
+
+[ext_resource type="PackedScene" uid="uid://c75xuvkvacxlt" path="res://Scene/Game Object/door_end.tscn" id="1_6nlvk"]
+[ext_resource type="Script" uid="uid://kg51ersp1hkw" path="res://Scripts/game_manager.gd" id="1_wm77i"]
+[ext_resource type="PackedScene" uid="uid://cj27bxub6cvlv" path="res://Scene/parallax_background.tscn" id="2_pjm5i"]
+[ext_resource type="FontFile" uid="uid://dliqfphrc3jgo" path="res://Fonts/PixelOperator8.ttf" id="3_dueu4"]
+[ext_resource type="Texture2D" uid="uid://b882xjlblm321" path="res://Sprite/Heart.png" id="4_7cl8x"]
+[ext_resource type="PackedScene" uid="uid://dc7cyey7n8oq" path="res://Scene/Game Object/tilemap.tscn" id="5_7cl8x"]
+[ext_resource type="Texture2D" uid="uid://byjyortno6gg6" path="res://Sprite/EmptyHeart.png" id="5_yfyjy"]
+[ext_resource type="Script" uid="uid://bntoaau0ga4p6" path="res://Scripts/pause.gd" id="6_6nlvk"]
+[ext_resource type="PackedScene" uid="uid://c11r5t8lput1h" path="res://Scene/Game Object/worldborder_killzone.tscn" id="6_yfyjy"]
+[ext_resource type="PackedScene" uid="uid://bdspnsxjpt7m" path="res://Scene/Game Object/chiikawa.tscn" id="7_6nlvk"]
+[ext_resource type="Texture2D" uid="uid://bq28t7akcpahn" path="res://Sprite/Pause Button.png" id="7_k5sh2"]
+[ext_resource type="Texture2D" uid="uid://6x2vrnotfuwy" path="res://Sprite/keyboard.png" id="8_7cl8x"]
+[ext_resource type="PackedScene" uid="uid://dot3fibrcd5nx" path="res://Scene/Game Object/Collectible.tscn" id="12_yfyjy"]
+[ext_resource type="PackedScene" uid="uid://dypgb7fum44ul" path="res://Scene/Menu/level_menu.tscn" id="14_06fqa"]
+[ext_resource type="PackedScene" uid="uid://scc1teb8wvmi" path="res://Scene/Game Object/platform.tscn" id="14_k5sh2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hspdg"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.533037, 0.533037, 0.533037, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Level 1" type="Node2D"]
+
+[node name="Game Manager" type="Node" parent="." node_paths=PackedStringArray("hearts")]
+unique_name_in_owner = true
+script = ExtResource("1_wm77i")
+hearts = [NodePath("../UI/Hearts/BoxContainer/Heart"), NodePath("../UI/Hearts/BoxContainer/Heart2"), NodePath("../UI/Hearts/BoxContainer/Heart3")]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_pjm5i")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+offset_left = 19.0
+offset_top = 17.0
+offset_right = 108.0
+offset_bottom = 50.0
+scale = Vector2(1.6433, 1.97411)
+
+[node name="PointsLabel" type="Label" parent="UI/Panel"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_dueu4")
+theme_override_font_sizes/font_size = 8
+text = "Keys: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hearts" type="Panel" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -311.0
+offset_top = 19.0
+offset_right = -105.0
+offset_bottom = 86.0
+grow_horizontal = 0
+
+[node name="BoxContainer" type="BoxContainer" parent="UI/Hearts"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -33.0
+offset_right = 103.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heart" type="TextureRect" parent="UI/Hearts/BoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("4_7cl8x")
+expand_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="UI/Hearts/BoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("4_7cl8x")
+expand_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="UI/Hearts/BoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("4_7cl8x")
+expand_mode = 2
+
+[node name="Empty Hearts" type="BoxContainer" parent="UI/Hearts"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -32.5
+offset_right = 103.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heart" type="TextureRect" parent="UI/Hearts/Empty Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_yfyjy")
+expand_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="UI/Hearts/Empty Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_yfyjy")
+expand_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="UI/Hearts/Empty Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_yfyjy")
+expand_mode = 2
+
+[node name="Pause" type="Node" parent="UI"]
+script = ExtResource("6_6nlvk")
+
+[node name="Button" type="Button" parent="UI/Pause"]
+texture_filter = 1
+offset_left = 1070.0
+offset_top = 20.0
+offset_right = 1136.0
+offset_bottom = 86.0
+theme_override_icons/icon = ExtResource("7_k5sh2")
+expand_icon = true
+
+[node name="Pause Panel" type="Panel" parent="UI/Pause"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Pause/Pause Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -226.0
+offset_top = 81.0
+offset_right = 226.0
+offset_bottom = 212.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Game Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Pause/Pause Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -114.0
+offset_right = 167.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Resume" type="Button" parent="UI/Pause/Pause Panel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Resume"
+
+[node name="Back to menu" type="Button" parent="UI/Pause/Pause Panel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Back to menu"
+
+[node name="Restart level" type="Button" parent="UI/Pause/Pause Panel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Restart level
+"
+
+[node name="Death" type="Panel" parent="UI"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Death" type="Label" parent="UI/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -164.0
+offset_right = 56.5
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.82881, 2.71939e-06, 5.77569e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "You died"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="UI/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -53.0
+offset_right = 170.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+vertical = true
+
+[node name="Restart level" type="Button" parent="UI/Death/BoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Restart level
+"
+
+[node name="Back to menu" type="Button" parent="UI/Death/BoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Back to menu"
+
+[node name="Chiikawa" parent="." instance=ExtResource("7_6nlvk")]
+position = Vector2(65, -18)
+
+[node name="tutorial walk" type="Node2D" parent="."]
+position = Vector2(-3.8147e-06, -62)
+scale = Vector2(0.4, 0.4)
+
+[node name="key" type="Sprite2D" parent="tutorial walk"]
+texture_filter = 1
+position = Vector2(185, -37.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_7cl8x")
+region_enabled = true
+region_rect = Rect2(9, 225, 79, 31)
+
+[node name="key2" type="Sprite2D" parent="tutorial walk"]
+texture_filter = 1
+position = Vector2(185, -97.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_7cl8x")
+region_enabled = true
+region_rect = Rect2(9, 129, 79, 31)
+
+[node name="Label" type="Label" parent="tutorial walk"]
+texture_filter = 1
+offset_right = 434.0
+offset_bottom = 35.0
+theme_override_fonts/font = ExtResource("3_dueu4")
+text = "Press A or D to move left or right. 
+You can also use arrow keys."
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="tutorial keys" type="Node2D" parent="."]
+position = Vector2(705, -67)
+scale = Vector2(0.4, 0.4)
+
+[node name="Label" type="Label" parent="tutorial keys"]
+texture_filter = 1
+offset_left = -72.4998
+offset_top = -100.0
+offset_right = 513.5
+offset_bottom = -65.0
+theme_override_fonts/font = ExtResource("3_dueu4")
+text = "Collect 3 keys to unlock the next level."
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="tutorial jump" type="Node2D" parent="."]
+position = Vector2(322, -73)
+scale = Vector2(0.4, 0.4)
+
+[node name="key" type="Sprite2D" parent="tutorial jump"]
+texture_filter = 1
+position = Vector2(122.5, -37.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_7cl8x")
+region_enabled = true
+region_rect = Rect2(32, 3, 31, 31)
+
+[node name="key2" type="Sprite2D" parent="tutorial jump"]
+texture_filter = 1
+position = Vector2(185, -37.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_7cl8x")
+region_enabled = true
+region_rect = Rect2(128, 99, 31, 31)
+
+[node name="key3" type="Sprite2D" parent="tutorial jump"]
+texture_filter = 1
+position = Vector2(310, -37.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_7cl8x")
+region_enabled = true
+region_rect = Rect2(102, 225, 85, 32)
+
+[node name="Label" type="Label" parent="tutorial jump"]
+texture_filter = 1
+offset_right = 434.0
+offset_bottom = 35.0
+theme_override_fonts/font = ExtResource("3_dueu4")
+text = "Press W, Up arrow key or space bar
+to jump."
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TileMapLayer" parent="." instance=ExtResource("5_7cl8x")]
+tile_map_data = PackedByteArray("AAD+/wAAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAAJAAAAAQAAAAAAAAAKAAAAAQAAAAAAAAALAAAAAQAAAAAAAAAMAAAAAQAAAAAAAAD+/wEAAQABAAAAAAD//wEAAQABAAAAAAAAAAEAAQABAAAAAAABAAEAAQABAAAAAAACAAEAAQABAAAAAAADAAEAAQABAAAAAAAEAAEAAQABAAAAAAAFAAEAAQABAAAAAAAGAAEAAQABAAAAAAAHAAEAAQABAAAAAAAIAAEAAQABAAAAAAAJAAEAAQABAAAAAAAKAAEAAQABAAAAAAALAAEAAQABAAAAAAAMAAEAAQABAAAAAAD+/wIAAQABAAAAAAD//wIAAQABAAAAAAAAAAIAAQABAAAAAAABAAIAAQABAAAAAAACAAIAAQABAAAAAAADAAIAAQABAAAAAAAEAAIAAQABAAAAAAAFAAIAAQABAAAAAAAGAAIAAQABAAAAAAAHAAIAAQABAAAAAAAIAAIAAQABAAAAAAAJAAIAAQABAAAAAAAKAAIAAQABAAAAAAALAAIAAQABAAAAAAAMAAIAAQABAAAAAAAPAAAAAQABAAAAAAAQAAAAAQABAAAAAAAPAP//AQAAAAAAAAAQAP//AQAAAAAAAAARAP//AQAAAAAAAAASAP//AQAAAAAAAAATAP//AQAAAAAAAAAUAP//AQAAAAAAAAAPAAEAAQABAAAAAAAPAAIAAQABAAAAAAAQAAEAAQABAAAAAAARAAEAAQABAAAAAAARAAIAAQABAAAAAAAQAAIAAQABAAAAAAASAAEAAQABAAAAAAATAAEAAQABAAAAAAASAAAAAQABAAAAAAARAAAAAQABAAAAAAATAAAAAQABAAAAAAAUAAEAAQABAAAAAAAUAAAAAQABAAAAAAAUAAIAAQABAAAAAAATAAIAAQABAAAAAAASAAIAAQABAAAAAAAVAAEAAQABAAAAAAAVAAIAAQABAAAAAAAVAAAAAQAAAAAAAAAWAAEAAQABAAAAAAAWAAIAAQABAAAAAAAXAAIAAQABAAAAAAAWAAAAAQAAAAAAAAAXAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAZAAAAAQAAAAAAAAAaAAAAAQAAAAAAAAAXAAEAAQABAAAAAAAYAAEAAQABAAAAAAAZAAEAAQABAAAAAAAaAAEAAQABAAAAAAAaAAIAAQABAAAAAAAZAAIAAQABAAAAAAAYAAIAAQABAAAAAAATAP7/AQACAAAAAAAQAP7/AQACAAAAAAAJAP//AQACAAAAAAD/////AQACAAAAAAAdAP7/AQAAAAAAAAAdAP//AQABAAAAAAAdAAAAAQABAAAAAAAdAAEAAQABAAAAAAAdAAIAAQABAAAAAAA=")
+
+[node name="Worldborder Killzone" parent="." instance=ExtResource("6_yfyjy")]
+position = Vector2(322, 61)
+
+[node name="Door end" parent="." instance=ExtResource("1_6nlvk")]
+position = Vector2(783, -32)
+target_level = ExtResource("14_06fqa")
+level = 1
+
+[node name="Platform" parent="." instance=ExtResource("14_k5sh2")]
+position = Vector2(985, -130)
+
+[node name="Collectible1" parent="." instance=ExtResource("12_yfyjy")]
+position = Vector2(731, -20)
+
+[node name="Collectible2" parent="." instance=ExtResource("12_yfyjy")]
+position = Vector2(945, -79)
+
+[node name="Collectible3" parent="." instance=ExtResource("12_yfyjy")]
+position = Vector2(985, -148)
+
+[connection signal="pressed" from="UI/Pause/Button" to="UI/Pause" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Pause/Pause Panel/VBoxContainer/Resume" to="UI/Pause" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/Pause/Pause Panel/VBoxContainer/Back to menu" to="UI/Pause" method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="UI/Pause/Pause Panel/VBoxContainer/Restart level" to="UI/Pause" method="_on_restart_level_pressed"]
+[connection signal="pressed" from="UI/Death/BoxContainer/Restart level" to="UI/Pause" method="_on_restart_level_pressed"]
+[connection signal="pressed" from="UI/Death/BoxContainer/Back to menu" to="UI/Pause" method="_on_back_to_menu_pressed"]
+[connection signal="body_entered" from="Worldborder Killzone" to="Game Manager" method="_on_worldborder_killzone_body_entered"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c11r5t8lput1h"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2ix4a"]
+
+[node name="Worldborder Killzone" type="Area2D"]
+collision_mask = 6
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_2ix4a")

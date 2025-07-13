@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://dc0ivnikltnbx"]
+
+[ext_resource type="Script" uid="uid://citypwrxe4tr0" path="res://Scripts/audio_manager.gd" id="1_0816j"]
+[ext_resource type="Script" uid="uid://dehiyebcgymqo" path="res://Scripts/sound_effect.gd" id="2_efqax"]
+[ext_resource type="AudioStream" uid="uid://cv1pnhok5ugbb" path="res://Sounds/keys.wav" id="3_up112"]
+[ext_resource type="AudioStream" uid="uid://c6vin103wcaht" path="res://Sounds/grass2.wav" id="4_yf5i5"]
+[ext_resource type="AudioStream" uid="uid://cp0lqgfev20ci" path="res://Sounds/grass4.wav" id="5_4ca3f"]
+[ext_resource type="AudioStream" uid="uid://ylbimmoxcyoq" path="res://Sounds/explode.wav" id="6_up112"]
+
+[sub_resource type="Resource" id="Resource_xsexn"]
+script = ExtResource("2_efqax")
+limit = 2
+type = 2
+sound_effect = ExtResource("3_up112")
+volume = -2.0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://dehiyebcgymqo"
+
+[sub_resource type="Resource" id="Resource_mwifu"]
+script = ExtResource("2_efqax")
+limit = 3
+type = 0
+sound_effect = ExtResource("4_yf5i5")
+volume = -2.0
+pitch_scale = 1.0
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://dehiyebcgymqo"
+
+[sub_resource type="Resource" id="Resource_f34ed"]
+script = ExtResource("2_efqax")
+limit = 3
+type = 1
+sound_effect = ExtResource("5_4ca3f")
+volume = -2.0
+pitch_scale = 1.0
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://dehiyebcgymqo"
+
+[sub_resource type="Resource" id="Resource_yf5i5"]
+script = ExtResource("2_efqax")
+limit = 5
+type = 3
+sound_effect = ExtResource("6_up112")
+volume = -3.0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://dehiyebcgymqo"
+
+[node name="Audio Manager" type="Node2D"]
+script = ExtResource("1_0816j")
+sound_effects = Array[ExtResource("2_efqax")]([SubResource("Resource_xsexn"), SubResource("Resource_mwifu"), SubResource("Resource_f34ed"), SubResource("Resource_yf5i5")])

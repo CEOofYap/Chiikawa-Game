@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://duq63bc3i26tx"]
+
+[ext_resource type="Script" uid="uid://ca7hrfq4n7vci" path="res://Scripts/smoke_particles.gd" id="1_0drsu"]
+[ext_resource type="Texture2D" uid="uid://c6yglowp0khqd" path="res://Sprite/Smoke particle.png" id="2_qaloe"]
+
+[sub_resource type="Curve" id="Curve_owxx2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.795455, 0.595506), 0.0, 0.0, 0, 0, Vector2(1, 0.202247), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_0drsu"]
+_data = [Vector2(0.0909091, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.213483), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Smoke particles component" type="Node2D"]
+script = ExtResource("1_0drsu")
+
+[node name="Big particles" type="CPUParticles2D" parent="."]
+z_index = 4
+texture_filter = 1
+emitting = false
+amount = 6
+texture = ExtResource("2_qaloe")
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.8
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+damping_min = 40.0
+damping_max = 40.0
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_owxx2")
+color = Color(0.964742, 0.964742, 0.964742, 1)
+
+[node name="small particles" type="CPUParticles2D" parent="."]
+z_index = 4
+emitting = false
+amount = 16
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.8
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 150.0
+damping_min = 60.0
+damping_max = 80.0
+scale_amount_min = 1.5
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_0drsu")
+color = Color(0.964706, 0.964706, 0.964706, 1)

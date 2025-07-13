@@ -1,0 +1,384 @@
+[gd_scene load_steps=21 format=4 uid="uid://bpjimdkcqdsh3"]
+
+[ext_resource type="PackedScene" uid="uid://bdspnsxjpt7m" path="res://Scene/Game Object/chiikawa.tscn" id="1_f6udf"]
+[ext_resource type="PackedScene" uid="uid://dc7cyey7n8oq" path="res://Scene/Game Object/tilemap.tscn" id="1_sblpm"]
+[ext_resource type="PackedScene" uid="uid://scc1teb8wvmi" path="res://Scene/Game Object/platform.tscn" id="3_r34rm"]
+[ext_resource type="PackedScene" uid="uid://co1i420t7etfi" path="res://Scene/Game Object/enemy.tscn" id="4_2wwxx"]
+[ext_resource type="PackedScene" uid="uid://c11r5t8lput1h" path="res://Scene/Game Object/worldborder_killzone.tscn" id="4_j63at"]
+[ext_resource type="PackedScene" uid="uid://dot3fibrcd5nx" path="res://Scene/Game Object/Collectible.tscn" id="5_3amdw"]
+[ext_resource type="Script" uid="uid://kg51ersp1hkw" path="res://Scripts/game_manager.gd" id="6_1xcnr"]
+[ext_resource type="PackedScene" uid="uid://c75xuvkvacxlt" path="res://Scene/Game Object/door_end.tscn" id="7_ow1sv"]
+[ext_resource type="FontFile" uid="uid://dliqfphrc3jgo" path="res://Fonts/PixelOperator8.ttf" id="8_75buv"]
+[ext_resource type="PackedScene" uid="uid://ceo6c30t1wewj" path="res://Scene/Menu/main_menu.tscn" id="8_c2iwn"]
+[ext_resource type="Texture2D" uid="uid://b882xjlblm321" path="res://Sprite/Heart.png" id="10_0sxm5"]
+[ext_resource type="PackedScene" uid="uid://c0efme4m26mmu" path="res://Scene/Game Object/turret.tscn" id="11_7y4ci"]
+[ext_resource type="Texture2D" uid="uid://byjyortno6gg6" path="res://Sprite/EmptyHeart.png" id="11_hspdg"]
+[ext_resource type="PackedScene" uid="uid://cj27bxub6cvlv" path="res://Scene/parallax_background.tscn" id="11_mxd2g"]
+[ext_resource type="Script" uid="uid://bntoaau0ga4p6" path="res://Scripts/pause.gd" id="12_6njx3"]
+[ext_resource type="Texture2D" uid="uid://bq28t7akcpahn" path="res://Sprite/Pause Button.png" id="12_j63at"]
+[ext_resource type="Texture2D" uid="uid://6x2vrnotfuwy" path="res://Sprite/keyboard.png" id="12_mxd2g"]
+
+[sub_resource type="GDScript" id="GDScript_p2wc2"]
+script/source = "extends StaticBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rlixt"]
+distance = -1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hspdg"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.533037, 0.533037, 0.533037, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Main" type="Node2D"]
+position = Vector2(5, 2)
+
+[node name="Game Manager" type="Node" parent="." node_paths=PackedStringArray("hearts")]
+unique_name_in_owner = true
+script = ExtResource("6_1xcnr")
+hearts = [NodePath("../UI/Hearts/BoxContainer/Heart"), NodePath("../UI/Hearts/BoxContainer/Heart2"), NodePath("../UI/Hearts/BoxContainer/Heart3")]
+
+[node name="TileMapLayer" parent="." instance=ExtResource("1_sblpm")]
+tile_map_data = PackedByteArray("AAABAAIAAQABAAAAAAACAAIAAQABAAAAAAAAAAEAAQAAAAAAAAD//wIAAQABAAAAAAAAAAIAAQABAAAAAAD+/wEAAQAAAAAAAAD9/wEAAQAAAAAAAAD8/wEAAQAAAAAAAAD7/wEAAQAAAAAAAAD6/wEAAQAAAAAAAAD5/wEAAQABAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQABAAAAAAAEAAEAAQABAAAAAAAFAAEAAQABAAAAAAAEAAIAAQABAAAAAAADAAIAAQABAAAAAAD+/wIAAQABAAAAAAD9/wIAAQABAAAAAAD8/wIAAQABAAAAAAD7/wIAAQABAAAAAAD6/wIAAQABAAAAAAD5/wIAAQABAAAAAAADAAAAAQAAAAAAAAAEAAAAAQABAAAAAAAEAP//AQAAAAAAAAAFAAAAAQAAAAAAAAD+/wAAAQACAAAAAAADAP//AQACAAAAAAD//wEAAQAAAAAAAAD8////AQACAAEAAAD7////AQAAAAEAAAD5/wAAAQAAAAAAAAAJAAAAAQAAAAAAAAAKAAAAAQAAAAAAAAALAAAAAQAAAAAAAAAMAAAAAQAAAAAAAAANAAAAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAQAAAAAQAAAAAAAAARAAAAAQAAAAAAAAASAAAAAQAAAAAAAAATAAAAAQABAAAAAAAUAAAAAQAAAAAAAAAVAAAAAQAAAAAAAAAWAAAAAQAAAAAAAAAXAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAbAAAAAQAAAAAAAAAcAAAAAQAAAAAAAAAdAAAAAQAAAAAAAAAeAAAAAQAAAAAAAAATAP//AQAAAAAAAAAVAP//AQABAAAAAAAVAP7/AQAAAAAAAAAXAP//AQABAAAAAAAXAP7/AQABAAAAAAAXAP3/AQAAAAAAAAAYAAEAAQABAAAAAAAXAAEAAQABAAAAAAAWAAEAAQABAAAAAAAVAAEAAQABAAAAAAAUAAEAAQABAAAAAAATAAEAAQABAAAAAAASAAEAAQABAAAAAAARAAEAAQABAAAAAAAQAAEAAQABAAAAAAAPAAEAAQABAAAAAAAOAAEAAQABAAAAAAANAAEAAQABAAAAAAAMAAEAAQABAAAAAAALAAEAAQABAAAAAAAKAAEAAQABAAAAAAAJAAEAAQABAAAAAAAbAAEAAQABAAAAAAAcAAEAAQABAAAAAAAdAAEAAQABAAAAAAAeAAEAAQABAAAAAAAcAP//AQACAAAAAAAPAP//AQACAAAAAAALAP//AQACAAAAAAAbAPz/AQAAAAAAAAAcAPz/AQAAAAAAAAAdAPz/AQAAAAAAAAAbAP3/AQABAAAAAAAcAP3/AQABAAAAAAAdAP3/AQABAAAAAAAeAP3/AQABAAAAAAAeAPz/AQABAAAAAAAeAPv/AQAAAAAAAAAkAPr/AQAAAAAAAAAlAPr/AQAAAAAAAAAmAPr/AQAAAAAAAAAkAPv/AQABAAAAAAAlAPv/AQABAAAAAAAmAPv/AQABAAAAAAAlAPz/AQABAAAAAAANAP7/AQABAAAAAAAOAP7/AQABAAAAAAA=")
+
+[node name="Chiikawa" parent="." instance=ExtResource("1_f6udf")]
+position = Vector2(-188, -38)
+
+[node name="Worldborder Killzone" parent="." instance=ExtResource("4_j63at")]
+position = Vector2(-265, 50)
+
+[node name="WorldBorder" type="StaticBody2D" parent="."]
+position = Vector2(-221, 56)
+script = SubResource("GDScript_p2wc2")
+
+[node name="Worldborder" type="CollisionShape2D" parent="WorldBorder"]
+position = Vector2(0, 1)
+shape = SubResource("WorldBoundaryShape2D_rlixt")
+
+[node name="Platform" parent="." instance=ExtResource("3_r34rm")]
+position = Vector2(-209, -17)
+
+[node name="Enemy" parent="." instance=ExtResource("4_2wwxx")]
+position = Vector2(-102, 15)
+
+[node name="Enemy2" parent="." instance=ExtResource("4_2wwxx")]
+position = Vector2(-51, 15)
+
+[node name="Collectible" parent="." instance=ExtResource("5_3amdw")]
+position = Vector2(889, -146)
+
+[node name="Platform2" parent="." instance=ExtResource("3_r34rm")]
+position = Vector2(1065, -185)
+
+[node name="Door end" parent="." instance=ExtResource("7_ow1sv")]
+position = Vector2(1200, -224)
+target_level = ExtResource("8_c2iwn")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+offset_left = 19.0
+offset_top = 17.0
+offset_right = 108.0
+offset_bottom = 50.0
+scale = Vector2(1.6433, 1.97411)
+
+[node name="PointsLabel" type="Label" parent="UI/Panel"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_75buv")
+theme_override_font_sizes/font_size = 8
+text = "Keys: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hearts" type="Panel" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -311.0
+offset_top = 19.0
+offset_right = -105.0
+offset_bottom = 86.0
+grow_horizontal = 0
+
+[node name="BoxContainer" type="BoxContainer" parent="UI/Hearts"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -33.0
+offset_right = 103.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heart" type="TextureRect" parent="UI/Hearts/BoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("10_0sxm5")
+expand_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="UI/Hearts/BoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("10_0sxm5")
+expand_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="UI/Hearts/BoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("10_0sxm5")
+expand_mode = 2
+
+[node name="Empty Hearts" type="BoxContainer" parent="UI/Hearts"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -32.5
+offset_right = 103.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heart" type="TextureRect" parent="UI/Hearts/Empty Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_hspdg")
+expand_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="UI/Hearts/Empty Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_hspdg")
+expand_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="UI/Hearts/Empty Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_hspdg")
+expand_mode = 2
+
+[node name="Pause" type="Node" parent="UI"]
+script = ExtResource("12_6njx3")
+
+[node name="Button" type="Button" parent="UI/Pause"]
+texture_filter = 1
+offset_left = 1070.0
+offset_top = 20.0
+offset_right = 1136.0
+offset_bottom = 86.0
+theme_override_icons/icon = ExtResource("12_j63at")
+expand_icon = true
+
+[node name="Pause Panel" type="Panel" parent="UI/Pause"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Pause/Pause Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -226.0
+offset_top = 81.0
+offset_right = 226.0
+offset_bottom = 212.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Game Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Pause/Pause Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -114.0
+offset_right = 167.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Resume" type="Button" parent="UI/Pause/Pause Panel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Resume"
+
+[node name="Back to menu" type="Button" parent="UI/Pause/Pause Panel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Back to menu"
+
+[node name="Restart level" type="Button" parent="UI/Pause/Pause Panel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Restart level
+"
+
+[node name="Death" type="Panel" parent="UI"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Death" type="Label" parent="UI/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -164.0
+offset_right = 56.5
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.82881, 2.71939e-06, 5.77569e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "You died"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="UI/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -53.0
+offset_right = 170.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+vertical = true
+
+[node name="Restart level" type="Button" parent="UI/Death/BoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Restart level
+"
+
+[node name="Back to menu" type="Button" parent="UI/Death/BoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hspdg")
+text = "Back to menu"
+
+[node name="Collectible2" parent="." instance=ExtResource("5_3amdw")]
+position = Vector2(1231, -206)
+
+[node name="Collectible3" parent="." instance=ExtResource("5_3amdw")]
+position = Vector2(1231, -233)
+
+[node name="Turret" parent="." node_paths=PackedStringArray("timer") instance=ExtResource("11_7y4ci")]
+position = Vector2(-100, -46)
+timer = NodePath("Turret Cooldown")
+direction = -1
+
+[node name="Turret Cooldown" type="Timer" parent="Turret"]
+wait_time = 2.0
+
+[node name="Turret2" parent="." node_paths=PackedStringArray("timer") instance=ExtResource("11_7y4ci")]
+position = Vector2(-145, -46)
+timer = NodePath("Turret Cooldown")
+direction = 1
+speed = 20
+
+[node name="Turret Cooldown" type="Timer" parent="Turret2"]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("11_mxd2g")]
+
+[node name="tutorial" type="Node2D" parent="."]
+position = Vector2(-52, -49)
+scale = Vector2(0.4, 0.4)
+
+[node name="key" type="Sprite2D" parent="tutorial"]
+texture_filter = 1
+position = Vector2(185, -37.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("12_mxd2g")
+region_enabled = true
+region_rect = Rect2(9, 129, 79, 31)
+
+[node name="Label" type="Label" parent="tutorial"]
+texture_filter = 1
+offset_right = 434.0
+offset_bottom = 35.0
+theme_override_fonts/font = ExtResource("8_75buv")
+text = "Press A or D to move left or right. 
+You can also use arrow keys."
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="health_decrease" from="Chiikawa" to="Game Manager" method="_on_chiikawa_health_decrease"]
+[connection signal="body_entered" from="Worldborder Killzone" to="Game Manager" method="_on_worldborder_killzone_body_entered"]
+[connection signal="pressed" from="UI/Pause/Button" to="UI/Pause" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Pause/Pause Panel/VBoxContainer/Resume" to="UI/Pause" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/Pause/Pause Panel/VBoxContainer/Back to menu" to="UI/Pause" method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="UI/Pause/Pause Panel/VBoxContainer/Restart level" to="UI/Pause" method="_on_restart_level_pressed"]
+[connection signal="pressed" from="UI/Death/BoxContainer/Restart level" to="UI/Pause" method="_on_restart_level_pressed"]
+[connection signal="pressed" from="UI/Death/BoxContainer/Back to menu" to="UI/Pause" method="_on_back_to_menu_pressed"]
+[connection signal="timeout" from="Turret/Turret Cooldown" to="Turret" method="_on_turret_cooldown_timeout"]
+[connection signal="timeout" from="Turret2/Turret Cooldown" to="Turret2" method="_on_turret_cooldown_timeout"]

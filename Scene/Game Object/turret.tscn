@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0efme4m26mmu"]
+
+[ext_resource type="Script" uid="uid://bbnppib8vxv4v" path="res://Scripts/turret.gd" id="1_3wuqy"]
+[ext_resource type="Texture2D" uid="uid://bbgrbw6n7thje" path="res://Sprite/Turret.png" id="2_htfsy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxk0r"]
+atlas = ExtResource("2_htfsy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ioj4"]
+atlas = ExtResource("2_htfsy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyhd0"]
+atlas = ExtResource("2_htfsy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gftdm"]
+atlas = ExtResource("2_htfsy")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_taphi"]
+atlas = ExtResource("2_htfsy")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvx0n"]
+atlas = ExtResource("2_htfsy")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj7t2"]
+atlas = ExtResource("2_htfsy")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u8wta"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxk0r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ioj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyhd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gftdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_taphi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvx0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj7t2")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 10.0
+}]
+
+[node name="Turret" type="Node2D"]
+script = ExtResource("1_3wuqy")
+
+[node name="Turret Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_u8wta")
+animation = &"shoot"
+frame = 5
+frame_progress = 1.0
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(-10, 1)
