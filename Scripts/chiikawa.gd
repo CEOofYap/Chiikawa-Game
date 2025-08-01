@@ -69,13 +69,20 @@ func _process(delta: float) -> void:
 		attack.attack_direction = facing
 		attack.isfireball = false
 		is_attack = true
+		if Global.rng.randi_range(0 , 1):
+			AudioManager.create_audio(Sound_effect.SOUND_EFFECT_TYPE.chiikawa_attack1)
+		else:
+			AudioManager.create_audio(Sound_effect.SOUND_EFFECT_TYPE.chiikawa_attack2)
 		animated_sprite_2d.play("buffer")
 		await get_tree().create_timer(buffer).timeout
 		await attack_component.attack(attack)
 		is_attack = false
-
 		buffer_time.start()
 
 
 func _on_health_component_health_changed() -> void:
 	emit_signal("health_decrease")
+	if Global.rng.randi_range(0 , 1):
+		AudioManager.create_audio(Sound_effect.SOUND_EFFECT_TYPE.get_hit1)
+	else:
+		AudioManager.create_audio(Sound_effect.SOUND_EFFECT_TYPE.get_hit2)

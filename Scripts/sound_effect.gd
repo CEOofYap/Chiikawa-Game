@@ -5,7 +5,12 @@ enum SOUND_EFFECT_TYPE {
 	walk1,
 	walk2,
 	collect_key,
-	fireball_explode
+	fireball_explode,
+	get_hit1,
+	get_hit2,
+	chiikawa_attack1,
+	chiikawa_attack2,
+	hit
 }
 
 @export_range(0, 10) var limit: int = 5

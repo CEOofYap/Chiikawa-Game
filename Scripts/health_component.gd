@@ -16,10 +16,10 @@ func damage(attack: Attack):
 	if parent.is_in_group("player"):
 		parent.health_left -= attack.attack_damage
 		emit_signal("health_changed")
-		
 	animated_sprite_2d.modulate = Color(10,10,10,10)
 	if !attack.isfireball:
 		await smoke_particles.emitsmoke(attack.attack_direction)
+		AudioManager.create_audio(Sound_effect.SOUND_EFFECT_TYPE.hit)
 	print(parent, ": ", health)
 	timer.start()
 	if health <= 0 && !get_parent().is_in_group("player"):
